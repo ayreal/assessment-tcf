@@ -25,8 +25,6 @@ class CommentsController {
         // check to make sure the input is not blank before creating Comment
         if (commentText.trim().length > 0) {
           const comment = new Comment(commentText, imageId);
-          const image = comment.findImage(imageId);
-
           // + execute the render function on that found image object to append the new comment
           this.render(comment);
         }
@@ -38,8 +36,9 @@ class CommentsController {
   }
 
   render(commentObject) {
+    const imageId = commentObject.image.id;
     // + selects the appropriate `ul` for this comment to be added to
-    const list = document.getElementById(`comments-${commentObject.imageId}`);
+    const list = document.getElementById(`comments-${imageId}`);
     // + appends the new comment element to this `ul`
     list.insertAdjacentHTML("beforeend", commentObject.commentEl());
   }

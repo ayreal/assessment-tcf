@@ -1,8 +1,7 @@
-// initialize store with key of comments that points to empty array
-let store = { comments: [] };
-
-// use IFFE pattern to keep id variable out of global scope
+// use IFFE pattern to keep id/store variables out of global scope
 const Comment = (() => {
+  // initialize store with key of comments that points to empty array
+  let store = { comments: [] };
   let id = 0;
 
   return class Comment {
@@ -10,7 +9,7 @@ const Comment = (() => {
     constructor(comment, imageId) {
       this.id = ++id;
       this.comment = comment;
-      this.imageId = imageId;
+      this.image = this.findImage(imageId);
 
       // + should save new comment to Comment.all property
       store.comments.push(this);
